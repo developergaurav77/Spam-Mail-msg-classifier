@@ -39,15 +39,8 @@ def transform(text):
 app = Flask(__name__)
 
 
-vectorizer = joblib.load('vectorize.pkl')
-model = joblib.load('bnb_model.sav')
-
-# @app.route("/<result>")
-# def predict(result):
-#     if f"result" == 1:
-#         return f"msg might be spam"
-#     else:
-#         return f"msg is ham"
+tfidf = joblib.load('tfidf.pkl')
+model = joblib.load('mnb_model.sav')
 
 @app.route('/',methods=['POST','GET'])
 def result():
@@ -65,7 +58,8 @@ def result():
 
         # X= np.array([[msg]])
 
-        cv = vectorizer.transform([transformed_text])
+        cv = tfidf.transform([transformed_text])
+        print(cv)
 
 
 
